@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f0f0f0;
+  font-size: 1rem;
+}
+
+.container {
+  max-width: 700px;
+  height: 500px;
+  background-color: #fff;
+  border-radius: 10px 10px 200px 10px;
+}
+
+.input {
+  height: 30px;
+  padding: 1.5625em 0.9375em;
+  width: 100%;
+  max-width: 150px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 1.25em; 
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-label-group {
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  margin-right: 1.25em; 
+}
+
+form {
+  padding: 1.875em 1.875em 0 1.875em;
+}
+
+.submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin-top: 1.875em;
+}
+
+.submit-button {
+  /* Existing styles */
+  min-width: 60px;
+  min-height: 60px;
+  border-radius: 50%;
+  background-color: #864cff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.875rem;
+  overflow: hidden; /* Ensures the arrow does not show outside the button */
+  position: relative; /* Needed for absolute positioning of the arrow */
+}
+
+.submit-button i {
+  position: absolute; /* Position the arrow absolutely within the button */
+  top: 50%; /* Start at the center */
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Define the keyframes for the arrow animation */
+@keyframes arrowAnimation {
+  0% {
+    top: 50%;
+    opacity: 1;
+  }
+
+  10% {
+    top: 40%;
+    opacity: 1;
+  }
+
+  50% {
+    top: 100%; /* Move down to the bottom of the button */
+    opacity: 0;
+  }
+  
+  75% {
+    top: 0%; /* Arrow reappears at the top */
+    opacity: 0;
+  }
+
+  80% {
+    top: 60%; /* Arrow reappears at the top */
+    opacity: 1;
+  }
+
+  100% {
+    top: 50%; /* Move to the middle of the button */
+    opacity: 1;
+  }
+}
+
+/* Apply the animation on hover */
+.submit-button:hover i {
+  animation: arrowAnimation 0.8s ease-in-out;
+}
+
+.break-line {
+  width: 500px;
+  height: 0%;
+  color: #e2e2e2;
+  margin: 0;
+}
+
+.required-field-error, .required-date-error{
+  color: #ff0000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  margin:0;
+  display:none;
+}
+
+.age-result-container{
+  margin: 0 1.875em 1.875em 1.875em;
+}
+
+.text-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.age-number, .age-date{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 4.375rem;
+  margin:0;
+}
+
+.age-number{
+  color: #864cff;
+  margin-right: 0.3em;
+}
