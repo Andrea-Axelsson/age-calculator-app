@@ -42,13 +42,8 @@ const AgeForm = () => {
         const date = new Date()
 
         const currentDay : number = date.getDate()
-        console.log("day",currentDay)
-
         const currentMonth : number = date.getMonth() +1
-        console.log("month",currentMonth)
-
         const currentYear : number = date.getFullYear()
-        console.log("year",currentYear)
 
         return { day: currentDay, month: currentMonth, year: currentYear }
 
@@ -56,19 +51,28 @@ const AgeForm = () => {
 
     function calculateValues(inputDate: {day: number, month: number , year: number}, currentDate: {day: number, month: number, year: number}){
 
-        const ageInYears = currentDate.year - inputDate.year
-        console.log("I am", ageInYears, "Years old")    
+        let ageInYears : number = currentDate.year - inputDate.year
 
-        const monthDifference = ageInYears * 12
-        console.log("I am", monthDifference, "Months old")
+        if (currentDate.month < inputDate.month){
+            ageInYears --
 
-        const dayDifference =  ageInYears * 365
-        console.log("I am", dayDifference, "Days old")
+        }else if (currentDate.month >= inputDate.month && currentDate.day < inputDate.day){
+            ageInYears --
 
-        return dayDifference
+        }else if (currentDate.month >= inputDate.month){
+            ageInYears
+        }    
+        
+        let ageInMonths : number = ageInYears * 12
+        let ageInDays : number =  ageInYears * 365
+
+
+        return {ageInYears, ageInMonths, ageInDays}
     }
 
     calculateValues(getInputDateValues(), getCurrentDate())
+
+    console.log(calculateValues(getInputDateValues(), getCurrentDate()))
 
 
   return (
