@@ -5,9 +5,10 @@ type AgeFormProps = {
     handleDayChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     handleMonthChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     handleYearChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    calculateValues: () => {ageInYears: number, ageInMonths: number, ageInDays: number}
   }
 
-const AgeForm: React.FC<AgeFormProps> = (props) => {
+const AgeForm : React.FC<AgeFormProps> = (props) => {
     
   return (
 
@@ -67,7 +68,7 @@ const AgeForm: React.FC<AgeFormProps> = (props) => {
         
         <section className="submit">
             <hr className="break-line"></hr>
-            <button /* onClick={getDateValues} */ className="submit-button">
+            <button onClick={props.calculateValues} className="submit-button">
                 <i className="fa-solid fa-arrow-down"></i>
             </button>
 

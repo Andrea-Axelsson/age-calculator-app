@@ -1,28 +1,28 @@
-type AgeResultProps = {
-    calculateValues: () => {
-      ageInYears: number,
-      ageInMonths: number,
-      ageInDays: number,
-    }
+interface AgeResultProps {
+  myProp: {
+    ageInYears: number;
+    ageInMonths: number;
+    ageInDays: number;
   }
+  isVisible: boolean;
+}
   
-  
-
-    const AgeResult: React.FC<AgeResultProps> = (props) => {
-        const { ageInYears, ageInMonths, ageInDays } = props.calculateValues();
-      
+const AgeResult: React.FC<AgeResultProps> = ({ myProp, isVisible }) => {
+  if (!isVisible) {
+    return null;
+  }
         return (
           <section className="age-result-container">
             <article className="text-container">
-              <h1 className="age-number">{ageInYears}</h1>
+              <h1 className="age-number">--{myProp.ageInYears}</h1>
               <h1 className="age-date">years</h1>
             </article>
             <article className="text-container">
-              <h1 className="age-number">{ageInMonths}</h1>
+              <h1 className="age-number">--{myProp.ageInMonths}</h1>
               <h1 className="age-date">months</h1>
             </article>
             <article className="text-container">
-              <h1 className="age-number">{ageInDays}</h1>
+              <h1 className="age-number">--{myProp.ageInDays}</h1>
               <h1 className="age-date">days</h1>
             </article>
           </section>
