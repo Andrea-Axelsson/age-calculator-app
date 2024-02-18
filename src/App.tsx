@@ -7,7 +7,7 @@ const App = () => {
   const [day, setDay] = useState<number>(0)
   const [month, setMonth] = useState<number>(0)
   const [year, setYear] = useState<number>(0)
-  const [isButtonClicked, setIsButtonClicked] = useState<boolean>(false)
+  const [calculatedValues, setCalculatedValues] = useState<{ageInYears: number, ageInMonths: number, ageInDays: number}>({ageInYears: 0, ageInMonths: 0, ageInDays: 0})
 
   const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const dayValue : number = Number(e.target.value)
@@ -24,8 +24,6 @@ const App = () => {
       const yearValue : number = Number(e.target.value)
       setYear(yearValue)
   }
-
-
 
   function getInputDateValues()
   {
@@ -48,34 +46,23 @@ const App = () => {
 
   }
 
-  function calculateValues(inputDate: {day: number, month: number , year: number}, currentDate: {day: number, month: number, year: number}){
+  function calculateValues(e: React.FormEvent, inputDate: {day: number, month: number , year: number}, currentDate: {day: number, month: number, year: number}){
     console.log("BUtton clicked")
 
-    setIsButtonClicked(true)
-
+    e.preventDefault()
       let ageInYears : number = currentDate.year - inputDate.year
 
-      if (currentDate.month < inputDate.month){
+      if (currentDate.month < inputDate.month || 
+        (currentDate.month === inputDate.month && currentDate.day < inputDate.day)){
           ageInYears --
-
-      }else if (currentDate.month >= inputDate.month && currentDate.day < inputDate.day){
-          ageInYears --
-
-      }else if (currentDate.month >= inputDate.month){
-          ageInYears
-      }    
+        }
       
       let ageInMonths : number = ageInYears * 12
       let ageInDays : number =  ageInYears * 365
 
-
+      setCalculatedValues({ageInYears, ageInMonths, ageInDays})  
       return {ageInYears, ageInMonths, ageInDays}
   }
-
-  /* calculateValues(getInputDateValues(), getCurrentDate())
-
-  console.log(calculateValues(getInputDateValues(), getCurrentDate())) */
-
 
 
   return (
@@ -87,10 +74,10 @@ const App = () => {
     handleDayChange={handleDayChange}
     handleMonthChange={handleMonthChange}
     handleYearChange={handleYearChange}
-    calculateValues={() => calculateValues(getInputDateValues(), getCurrentDate())}
+    calculateValues={(e) => calculateValues(e,getInputDateValues(), getCurrentDate())}
     />
     <AgeResult
-    myProp={calculateValues(getInputDateValues(), getCurrentDate())} isVisible={isButtonClicked}
+    myProp={calculatedValues}
     />
     </main>
   )

@@ -5,13 +5,12 @@ type AgeFormProps = {
     handleDayChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     handleMonthChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     handleYearChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    calculateValues: () => {ageInYears: number, ageInMonths: number, ageInDays: number}
+    calculateValues: (e: React.FormEvent) => {ageInYears: number, ageInMonths: number, ageInDays: number}
   }
 
 const AgeForm : React.FC<AgeFormProps> = (props) => {
     
   return (
-
     <form>
         <section className="input-group">
         <label className="input-label-group">
