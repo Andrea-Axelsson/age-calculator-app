@@ -1,6 +1,6 @@
 import AgeForm from "./components/AgeForm"
 import AgeResult from "./components/AgeResult"
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const App = () => {
 
