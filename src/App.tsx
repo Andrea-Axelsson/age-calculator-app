@@ -8,20 +8,42 @@ const App = () => {
   const [month, setMonth] = useState<number>(0);
   const [year, setYear] = useState<number>(0);
   const [calculatedValues, setCalculatedValues] = useState<{ageInYears: number, ageInMonths: number, ageInDays: number}>({ageInYears: 0, ageInMonths: 0, ageInDays: 0});
+  const [errorMessageDay, seterrorMessageDay] = useState <string>("")
+  const [errorMessageMonth, seterrorMessageMonth] = useState <string>("")
+  const [errorMessageYear, seterrorMessageYear] = useState <string>("")
 
   // Event handlers for input changes
   const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const dayValue : number = Number(e.target.value);
+
+      if (dayValue < 1 || dayValue > 31){
+        seterrorMessageDay("Must be a valid day")
+      }else{
+        seterrorMessageDay("")
+      }
+
       setDay(dayValue);
   }    
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const monthValue : number = Number(e.target.value);
+
+      if (monthValue < 1 || monthValue > 12){
+        seterrorMessageMonth("Must be a valid month")
+      }else{
+        seterrorMessageMonth("")
+      }
+
       setMonth(monthValue);
   }
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const yearValue : number = Number(e.target.value);
+      if (yearValue < 1900 || yearValue > 2024){
+        seterrorMessageYear("Must be in the past")
+      }else{
+        seterrorMessageYear("")
+      }
       setYear(yearValue);
   }
 
@@ -65,6 +87,9 @@ const App = () => {
   return (
     <main className="container">
       <AgeForm
+        errorMessageYear={errorMessageYear}
+        errorMessageDay={errorMessageDay}
+        errorMessageMonth={errorMessageMonth}
         day={day}
         month={month}
         year={year}

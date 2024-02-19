@@ -1,4 +1,7 @@
 type AgeFormProps = {
+    errorMessageYear: string,
+    errorMessageDay: string,
+    errorMessageMonth: string,
     day: number,
     month: number,
     year: number,
@@ -7,6 +10,8 @@ type AgeFormProps = {
     handleYearChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     calculateValues: (e: React.FormEvent) => {ageInYears: number, ageInMonths: number, ageInDays: number}
   }
+
+  
 
 const AgeForm : React.FC<AgeFormProps> = (props) => {
     
@@ -27,7 +32,7 @@ const AgeForm : React.FC<AgeFormProps> = (props) => {
         required
         />
         <p className="required-field-error">This field is required</p>
-        <p className="required-date-error">Must be a valid day</p>
+        <p className="required-date-error">{props.errorMessageDay}</p>
         </label>
 
         <label className="input-label-group">
@@ -44,7 +49,7 @@ const AgeForm : React.FC<AgeFormProps> = (props) => {
         required
         />
         <p className="required-field-error">This field is required</p>
-        <p className="required-date-error">Must be a valid month</p>
+        <p className="required-date-error">{props.errorMessageMonth}</p>
         </label>
 
         <label className="input-label-group">
@@ -61,7 +66,7 @@ const AgeForm : React.FC<AgeFormProps> = (props) => {
         required
         />
         <p className="required-field-error">This field is required</p>
-        <p className="required-date-error">Must be in the past</p>
+        <p className="required-date-error">{props.errorMessageYear}</p>
         </label>
         </section>
         
