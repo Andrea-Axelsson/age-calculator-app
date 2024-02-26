@@ -1,6 +1,6 @@
 import AgeForm from "./components/AgeForm"
 import AgeResult from "./components/AgeResult"
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 const App = () => {
   // State variables for day, month, year, and calculated age values
@@ -11,12 +11,13 @@ const App = () => {
   const [errorMessageDay, seterrorMessageDay] = useState <string>("")
   const [errorMessageMonth, seterrorMessageMonth] = useState <string>("")
   const [errorMessageYear, seterrorMessageYear] = useState <string>("")
+  const [isAnimating, setIsAnimating] = useState<boolean>(false)
 
   // Event handlers for input changes
   const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const dayValue : number = Number(e.target.value);
 
-      if (dayValue < 1 || dayValue > 31){
+      if (dayValue === 0 || dayValue < 1 || dayValue > 31){
         seterrorMessageDay("Must be a valid day")
       }else{
         seterrorMessageDay("")
@@ -28,7 +29,7 @@ const App = () => {
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const monthValue : number = Number(e.target.value);
 
-      if (monthValue < 1 || monthValue > 12){
+      if (monthValue === 0 || monthValue < 1 || monthValue > 12){
         seterrorMessageMonth("Must be a valid month")
       }else{
         seterrorMessageMonth("")
@@ -39,8 +40,8 @@ const App = () => {
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const yearValue : number = Number(e.target.value);
-      if (yearValue < 1900 || yearValue > 2024){
-        seterrorMessageYear("Must be in the past")
+      if (yearValue === 0 || yearValue < 1900 || yearValue > 2024){
+        seterrorMessageYear("Must be between 1900 and 2024")
       }else{
         seterrorMessageYear("")
       }
@@ -70,6 +71,15 @@ const App = () => {
   // Function to calculate age values based on input and current date
   function calculateValues(e: React.FormEvent, inputDate: {day: number, month: number , year: number}, currentDate: {day: number, month: number, year: number}) {
     e.preventDefault();
+    setIsAnimating(true)
+    setTimeout(() => setIsAnimating(false), 800)
+
+    if (inputDate.day === 0 || inputDate.month === 0 || inputDate.year === 0 ||
+      errorMessageDay || errorMessageMonth || errorMessageYear) {
+    console.log("Invalid input or empty fields, calculation aborted.");
+    return { ageInYears: 0, ageInMonths: 0, ageInDays: 0 }
+  }
+
     let ageInYears : number = currentDate.year - inputDate.year;
 
     if (currentDate.month < inputDate.month || (currentDate.month === inputDate.month && currentDate.day < inputDate.day)) {
@@ -93,6 +103,7 @@ const App = () => {
         day={day}
         month={month}
         year={year}
+        isAnimating={isAnimating}
         handleDayChange={handleDayChange}
         handleMonthChange={handleMonthChange}
         handleYearChange={handleYearChange}
@@ -102,7 +113,7 @@ const App = () => {
         myProp={calculatedValues}
       />
     </main>
-  );
+  )
 }
 
 export default App; // Exporting the App component

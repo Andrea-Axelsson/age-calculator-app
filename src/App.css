@@ -5,6 +5,11 @@
 body {
   background-color: #f0f0f0;
   font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
@@ -65,18 +70,22 @@ form {
   justify-content: center;
   color: white;
   font-size: 1.875rem;
-  overflow: hidden; /* Ensures the arrow does not show outside the button */
-  position: relative; /* Needed for absolute positioning of the arrow */
+  overflow: hidden;
+  position: relative;
+}
+
+.submit-button:hover {
+  background-color: #4812bb;
 }
 
 .submit-button i {
-  position: absolute; /* Position the arrow absolutely within the button */
-  top: 50%; /* Start at the center */
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-/* Define the keyframes for the arrow animation */
+
 @keyframes arrowAnimation {
   0% {
     top: 50%;
@@ -89,28 +98,28 @@ form {
   }
 
   50% {
-    top: 100%; /* Move down to the bottom of the button */
+    top: 100%;
     opacity: 0;
   }
   
   75% {
-    top: 0%; /* Arrow reappears at the top */
+    top: 0%;
     opacity: 0;
   }
 
   80% {
-    top: 60%; /* Arrow reappears at the top */
+    top: 60%;
     opacity: 1;
   }
 
   100% {
-    top: 50%; /* Move to the middle of the button */
+    top: 50%;
     opacity: 1;
   }
 }
 
-/* Apply the animation on hover */
-.submit-button:hover i {
+
+.submit-button-animate i {
   animation: arrowAnimation 0.8s ease-in-out;
 }
 
@@ -149,4 +158,23 @@ form {
 .age-number{
   color: #864cff;
   margin-right: 0.3em;
+}
+
+@media (max-width: 600px) {
+  .age-number, .age-date{
+
+    font-size: 40px;
+    margin-bottom :12px;
+  }
+
+  .input {
+    font-size: 0.9rem;
+    border-radius: 5px;
+    margin-right: 1.25em; 
+  }
+  body {
+    display: block;
+
+  }
+
 }

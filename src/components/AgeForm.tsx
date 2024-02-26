@@ -2,6 +2,7 @@ type AgeFormProps = {
     errorMessageYear: string,
     errorMessageDay: string,
     errorMessageMonth: string,
+    isAnimating: boolean,
     day: number,
     month: number,
     year: number,
@@ -31,7 +32,6 @@ const AgeForm : React.FC<AgeFormProps> = (props) => {
         placeholder="DD"
         required
         />
-        <p className="required-field-error">This field is required</p>
         <p className="required-date-error">{props.errorMessageDay}</p>
         </label>
 
@@ -48,7 +48,6 @@ const AgeForm : React.FC<AgeFormProps> = (props) => {
         placeholder="MM"
         required
         />
-        <p className="required-field-error">This field is required</p>
         <p className="required-date-error">{props.errorMessageMonth}</p>
         </label>
 
@@ -65,14 +64,13 @@ const AgeForm : React.FC<AgeFormProps> = (props) => {
         placeholder="YYYY"
         required
         />
-        <p className="required-field-error">This field is required</p>
         <p className="required-date-error">{props.errorMessageYear}</p>
         </label>
         </section>
         
         <section className="submit">
             <hr className="break-line"></hr>
-            <button onClick={props.calculateValues} className="submit-button">
+            <button onClick={props.calculateValues} className={`submit-button ${props.isAnimating ? 'submit-button-animate':  ''}`}>
                 <i className="fa-solid fa-arrow-down"></i>
             </button>
 
